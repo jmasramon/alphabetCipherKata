@@ -63,10 +63,6 @@ var alphabetCipher = {
     extendedSecret = extendSecret(secret, plaintext);
 
     return _.map(plaintext, function (letter, index) {
-      console.log(extendedSecret, extendedSecret[index]);
-      console.log('col:',col[extendedSecret[index]]);
-      console.log(letter, substChart[letter]);
-      console.log(substChart[letter][col[extendedSecret[index]]]);
       return substChart[letter][col[extendedSecret[index]]];
     }).join("")
     // return 'hmkbxebpxpmyllyrxiiqtoltfgzzv';
