@@ -1,3 +1,5 @@
+var _ = require('lodash');
+
 var col = {
  a: 0,
  b: 1,
@@ -59,7 +61,15 @@ var substChart = {
 var alphabetCipher = {
   code: function (secret, plaintext) {
     extendedSecret = extendSecret(secret, plaintext);
-    return 'hmkbxebpxpmyllyrxiiqtoltfgzzv';
+
+    return _.map(plaintext, function (letter, index) {
+      console.log(extendedSecret, extendedSecret[index]);
+      console.log('col:',col[extendedSecret[index]]);
+      console.log(letter, substChart[letter]);
+      console.log(substChart[letter][col[extendedSecret[index]]]);
+      return substChart[letter][col[extendedSecret[index]]];
+    }).join("")
+    // return 'hmkbxebpxpmyllyrxiiqtoltfgzzv';
   }
 };
 
@@ -72,9 +82,11 @@ function extendSecret(secret, plaintext) {
 
   if (secLen >= plainLen) {return secret;}
   extSecret = secret;
-  while(lenDif >0){
-
+  while(lenDif > 0){
+    extSecret += secret;
+    lenDif -= secLen;
   }
+  return extSecret;
 }
 
 module.exports = alphabetCipher;
